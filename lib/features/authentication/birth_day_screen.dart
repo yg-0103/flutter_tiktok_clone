@@ -80,7 +80,6 @@ class _BirthDayScreenState extends State<BirthDayScreen> {
               cursorColor: Theme.of(context).primaryColor,
               enabled: false,
               decoration: InputDecoration(
-                hintText: 'Username',
                 hintStyle: TextStyle(
                   color: Colors.grey.shade400,
                 ),
