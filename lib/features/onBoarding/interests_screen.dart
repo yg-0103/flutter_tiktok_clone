@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:tiktok_clone/constants/gaps.dart';
 import 'package:tiktok_clone/constants/sizes.dart';
+import 'package:tiktok_clone/features/onBoarding/tutorial_screen.dart';
 import 'package:tiktok_clone/features/onBoarding/widgets/interest_button.dart';
 
 const interests = [
@@ -62,6 +63,11 @@ class _InterestsScreenState extends State<InterestsScreen> {
     setState(() {
       showTitle = _scrollController.offset > 110;
     });
+  }
+
+  void _onNextTap() {
+    Navigator.push(context,
+        MaterialPageRoute(builder: (context) => const TutorialScreen()));
   }
 
   @override
@@ -130,7 +136,7 @@ class _InterestsScreenState extends State<InterestsScreen> {
         child: Padding(
             padding: const EdgeInsets.all(Sizes.size20),
             child: CupertinoButton(
-              onPressed: () {},
+              onPressed: _onNextTap,
               color: Theme.of(context).primaryColor,
               child: const Text('Next'),
             )),
