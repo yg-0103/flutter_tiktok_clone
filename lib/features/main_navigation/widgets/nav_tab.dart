@@ -27,7 +27,7 @@ class NavTab extends StatelessWidget {
             duration: const Duration(
               milliseconds: 200,
             ),
-            opacity: isSelected ? 1 : 0.5,
+            opacity: isSelected ? 1 : 0.6,
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
@@ -35,7 +35,7 @@ class NavTab extends StatelessWidget {
                   icon,
                   color: Colors.white,
                 ),
-                Gaps.v4,
+                Gaps.v5,
                 Text(
                   title,
                   style: const TextStyle(
