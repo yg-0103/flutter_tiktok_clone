@@ -65,6 +65,10 @@ class _VideoPostState extends State<VideoPost>
         !_isPaused) {
       _videoPlayerController.play();
     }
+
+    if (info.visibleFraction == 0 && _videoPlayerController.value.isPlaying) {
+      _onToggleVideo();
+    }
   }
 
   void _onCommentsTap(BuildContext context) async {

@@ -9,12 +9,14 @@ class NavTab extends StatelessWidget {
     required this.title,
     required this.isSelected,
     required this.onTap,
+    required this.invert,
   });
 
   final IconData icon;
   final String title;
   final bool isSelected;
   final Function onTap;
+  final bool invert;
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +24,7 @@ class NavTab extends StatelessWidget {
       child: GestureDetector(
         onTap: () => onTap(),
         child: Container(
-          color: Colors.black,
+          color: invert ? Colors.white : Colors.black,
           child: AnimatedOpacity(
             duration: const Duration(
               milliseconds: 200,
@@ -33,13 +35,13 @@ class NavTab extends StatelessWidget {
               children: [
                 FaIcon(
                   icon,
-                  color: Colors.white,
+                  color: invert ? Colors.black : Colors.white,
                 ),
                 Gaps.v5,
                 Text(
                   title,
-                  style: const TextStyle(
-                    color: Colors.white,
+                  style: TextStyle(
+                    color: invert ? Colors.black : Colors.white,
                   ),
                 ),
               ],
