@@ -21,6 +21,7 @@ class _LoginFormScreenState extends State<LoginFormScreen> {
       if (_formKey.currentState!.validate()) {
         _formKey.currentState!.save();
 
+        // Replace 같은 느낌?
         Navigator.pushAndRemoveUntil(
           context,
           MaterialPageRoute(

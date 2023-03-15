@@ -4,9 +4,9 @@ import 'package:tiktok_clone/constants/gaps.dart';
 import 'package:tiktok_clone/constants/sizes.dart';
 import 'package:tiktok_clone/features/authentication/login_form_screen.dart';
 import 'package:tiktok_clone/features/discover/discover_screen.dart';
+import 'package:tiktok_clone/features/inbox/inbox_screen.dart';
 import 'package:tiktok_clone/features/main_navigation/widgets/nav_tab.dart';
 import 'package:tiktok_clone/features/main_navigation/widgets/post_video.button.dart';
-import 'package:tiktok_clone/features/onBoarding/tutorial_screen.dart';
 import 'package:tiktok_clone/features/videos/video_timeline_screen.dart';
 
 class MainNavigationScreen extends StatefulWidget {
@@ -25,6 +25,7 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
     });
   }
 
+// StateFull widget 에서는 어디서든 context를 참조할 수 있다.
   void onPostButtonTap() {
     Navigator.push(
       context,
@@ -56,7 +57,7 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
           ),
           Offstage(
             offstage: _selectedIdx != 3,
-            child: const TutorialScreen(),
+            child: const InboxScreen(),
           ),
           Offstage(
             offstage: _selectedIdx != 4,
@@ -96,7 +97,7 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
               ),
               Gaps.h24,
               NavTab(
-                icon: FontAwesomeIcons.message,
+                icon: FontAwesomeIcons.solidMessage,
                 title: 'Inbox',
                 isSelected: _selectedIdx == 3,
                 onTap: () => onTap(3),

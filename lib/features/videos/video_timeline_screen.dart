@@ -20,6 +20,7 @@ class _VideoTimelineScreenState extends State<VideoTimelineScreen> {
   ];
 
   void _pageTo(int page) {
+    // 이렇게하면 페이지 전환 시 마지막에 서서히 느려지는 부분을 제거할 수 있음
     _pageController.animateToPage(
       duration: _scrollDuration,
       curve: _scrollCurve,

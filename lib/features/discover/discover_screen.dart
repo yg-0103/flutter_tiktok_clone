@@ -47,6 +47,7 @@ class _DiscoverScreenState extends State<DiscoverScreen>
   @override
   void initState() {
     super.initState();
+    // vsync라는 친구가 필요할 땐 with SingleTickerProviderStateMixin 이게 필요하다.
     _tabController = TabController(length: tabs.length, vsync: this);
 
     _tabController.addListener(() {
@@ -66,6 +67,7 @@ class _DiscoverScreenState extends State<DiscoverScreen>
     return GestureDetector(
       onTap: _onStopWriting,
       child: Scaffold(
+        // resizeToAvoidBottomInset이 없으면 keyboard가 나타났을 때 UI가 찌그러짐.
         resizeToAvoidBottomInset: false,
         appBar: AppBar(
           title: Row(
