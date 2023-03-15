@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:tiktok_clone/constants/gaps.dart';
@@ -13,18 +14,78 @@ final tabs = [
   "Brands",
 ];
 
-class DiscoverScreen extends StatelessWidget {
+final images = [
+  'https://images.unsplash.com/photo-1678727467590-b6fe488997a7?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=964&q=80',
+  'https://images.unsplash.com/photo-1678783447940-3c7fd169cda2?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1035&q=80',
+  'https://images.unsplash.com/photo-1678614033802-d8b11cd7fb93?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwyN3x8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=60',
+  'https://plus.unsplash.com/premium_photo-1669381390251-4d7c013c4830?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=987&q=80',
+];
+
+class DiscoverScreen extends StatefulWidget {
   const DiscoverScreen({super.key});
 
   @override
+  State<DiscoverScreen> createState() => _DiscoverScreenState();
+}
+
+class _DiscoverScreenState extends State<DiscoverScreen>
+    with SingleTickerProviderStateMixin {
+  final TextEditingController _textEditingController = TextEditingController();
+  late TabController _tabController;
+  void _onChanged(String value) {
+    print(value);
+  }
+
+  void _onSubmitted(String value) {
+    print(value);
+  }
+
+  void _onStopWriting() {
+    FocusScope.of(context).unfocus();
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _tabController = TabController(length: tabs.length, vsync: this);
+
+    _tabController.addListener(() {
+      _onStopWriting();
+    });
+  }
+
+  @override
+  void dispose() {
+    _textEditingController.dispose();
+    _tabController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return DefaultTabController(
-      length: tabs.length,
+    return GestureDetector(
+      onTap: _onStopWriting,
       child: Scaffold(
+        resizeToAvoidBottomInset: false,
         appBar: AppBar(
-          title: const Text('Discover'),
+          title: Row(
+            children: [
+              Expanded(
+                child: CupertinoSearchTextField(
+                  controller: _textEditingController,
+                  onChanged: _onChanged,
+                  onSubmitted: _onSubmitted,
+                ),
+              ),
+              Gaps.h14,
+              const FaIcon(
+                FontAwesomeIcons.sliders,
+              ),
+            ],
+          ),
           elevation: 1,
           bottom: TabBar(
+            controller: _tabController,
             padding: const EdgeInsets.symmetric(
               horizontal: Sizes.size16,
             ),
@@ -40,8 +101,10 @@ class DiscoverScreen extends StatelessWidget {
           ),
         ),
         body: TabBarView(
+          controller: _tabController,
           children: [
             GridView.builder(
+              keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
               itemCount: 20,
               padding: const EdgeInsets.all(Sizes.size6),
               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
@@ -51,13 +114,19 @@ class DiscoverScreen extends StatelessWidget {
                   childAspectRatio: 9 / 21),
               itemBuilder: (context, index) => Column(
                 children: [
-                  AspectRatio(
-                    aspectRatio: 9 / 16,
-                    child: FadeInImage.assetNetwork(
-                      fit: BoxFit.fill,
-                      placeholder: 'assets/images/placeholder.png',
-                      image:
-                          'https://realclass2-public.imgix.net/reallive/season4-v2/thum_CB_WBB_156x208.jpg?auto=format&fit=max&w=3840',
+                  Container(
+                    clipBehavior: Clip.hardEdge,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(Sizes.size4),
+                    ),
+                    child: AspectRatio(
+                      aspectRatio: 9 / 16,
+                      child: FadeInImage.assetNetwork(
+                        fit: BoxFit.cover,
+                        placeholderFit: BoxFit.cover,
+                        placeholder: 'assets/images/placeholder.gif',
+                        image: images[index % 4],
+                      ),
                     ),
                   ),
                   Gaps.v6,
@@ -80,12 +149,12 @@ class DiscoverScreen extends StatelessWidget {
                     child: Row(
                       children: [
                         const CircleAvatar(
-                          radius: 15,
+                          radius: 14,
                           foregroundImage: NetworkImage(
                             'https://avatars.githubusercontent.com/u/71420665',
                           ),
                         ),
-                        Gaps.h3,
+                        Gaps.h4,
                         const Expanded(
                           child: Text(
                             'this is very long avartar name',
