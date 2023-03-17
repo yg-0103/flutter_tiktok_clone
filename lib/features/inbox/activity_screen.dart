@@ -17,7 +17,7 @@ class _ActivityScreenState extends State<ActivityScreen>
   late final AnimationController _animationController = AnimationController(
     vsync: this,
     duration: const Duration(
-      milliseconds: 150,
+      milliseconds: 200,
     ),
   );
 
