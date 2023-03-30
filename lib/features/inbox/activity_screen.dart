@@ -82,12 +82,19 @@ class _ActivityScreenState extends State<ActivityScreen>
   }
 
   @override
+  void dispose() {
+    _animationController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: GestureDetector(
           onTap: _toggleAnimations,
           child: Row(
+            mainAxisSize: MainAxisSize.min,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               const Text(
@@ -217,8 +224,8 @@ class _ActivityScreenState extends State<ActivityScreen>
               decoration: const BoxDecoration(
                 color: Colors.white,
                 borderRadius: BorderRadius.only(
-                  bottomLeft: Radius.circular(Sizes.size5),
-                  bottomRight: Radius.circular(Sizes.size5),
+                  bottomLeft: Radius.circular(Sizes.size10),
+                  bottomRight: Radius.circular(Sizes.size10),
                 ),
               ),
               child: Column(
