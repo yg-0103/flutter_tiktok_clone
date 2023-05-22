@@ -104,7 +104,7 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
                 invert: _selectedIdx != 0,
               ),
               NavTab(
-                icon: FontAwesomeIcons.user,
+                icon: FontAwesomeIcons.solidUser,
                 title: 'Profile',
                 isSelected: _selectedIdx == 4,
                 onTap: () => onTap(4),
