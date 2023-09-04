@@ -60,6 +60,7 @@ class _VideoPostState extends State<VideoPost>
   }
 
   void _onVisibilityChanged(VisibilityInfo info) {
+    if (!mounted) return;
     if (info.visibleFraction == 1 &&
         !_videoPlayerController.value.isPlaying &&
         !_isPaused) {
@@ -148,12 +149,12 @@ class _VideoPostState extends State<VideoPost>
             ),
           ),
         ),
-        Positioned(
+        const Positioned(
           bottom: 20,
           left: 10,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
-            children: const [
+            children: [
               Text(
                 "@YG",
                 style: TextStyle(
